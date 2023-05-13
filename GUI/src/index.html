@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <script type="module" src="script.js" defer="defer"></script>
+</head>
+<body>
+<div class="container">
+
+    <nav class="navigation-bar">
+        <ul>
+            <li><a href="index.html">main</a></li>
+            <li><a href="bakery_list/bakery_list.html">bakeries</a></li>
+        </ul>
+    </nav>
+
+    <section class="main-section">
+        <article class="text--justified">
+            <header><h2>Files</h2></header>
+            <table class="data-table">
+                <thead>
+                <tr>
+                    <th>name</th>
+                    <th>view</th>
+                </tr>
+                </thead>
+                <tbody id="tableBody">
+                <tr>
+                    <td>name</td>
+                    <td><a href="#">view</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </article>
+    </section>
+
+    <input type="file" id="file_upload">Select file</input><br>
+    <button onclick="postFile()">Post file</button>
+</div>
+</body>
+</html>

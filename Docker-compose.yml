@@ -1,0 +1,43 @@
+version: '8.3'
+services:
+    mysqldb:
+      image: mysql:8.0
+      networks:
+       - springmysql-net
+      environment:
+       - MYSQL_ROOT_PASSWORD=#P1n2M3# 
+       - MYSQL_DATABASE=fora
+    spring:
+      build: ./spring/
+      networks:
+        - springmysql-net
+      environment:
+        - spring.datasource.url=jdbc:mysql://mysqldb:3306/fora
+        - spring.datasource.username=root
+        - spring.datasource.password=#P1n2M3#
+      volumes:
+        - myapp:/home/node/app
+      depends_on:
+        - mysqldb
+      command: ["/wait-for-it.sh", "mysqldb:3306", "--", "java","-jar","/app.jar"] 
+    gui:
+      build: ./GUI/
+      networks:
+        - springgui
+    firstlb:
+      build: ./firstLoadBalancer/
+      ports:
+        - "3000:83"
+        - "8080:84"
+      networks:
+        - springgui
+    secondlb:
+      build: ./secondLoadBalancer/
+      networks:
+        - springmysql-net
+        - springgui
+volumes:
+  myapp:
+networks:
+  springmysql-net:
+  springgui:
