@@ -25,14 +25,14 @@ services:
       networks:
         - springgui
     firstlb:
-      build: ./firstLoadBalancer/
+      build: ./firstReverseProxy/
       ports:
         - "3000:83"
         - "8080:84"
       networks:
         - springgui
     secondlb:
-      build: ./secondLoadBalancer/
+      build: ./secondReverseProxy/
       networks:
         - springmysql-net
         - springgui
